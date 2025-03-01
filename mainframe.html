@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ИС Октябрь</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            justify-items: center;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 10px;
+            background: #444;
+            border-radius: 10px;
+        }
+        .video-container iframe {
+            width: 300px;
+            height: 170px;
+            border-radius: 5px;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            background: #222;
+            padding: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+        .menu-toggle {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: #555;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            display: none;
+        }
+        .sidebar.collapsed + .menu-toggle {
+            display: block;
+        }
+        .frame {
+            display: none;
+            padding: 20px;
+            background: #555;
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+        .frame.active {
+            display: block;
+        }
+        .entry {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .exit {
+            color: #FF5733;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <button onclick="toggleMenu()">☰</button>
+        <button onclick="showFrame(2)">Камеры</button>
+        <button onclick="showFrame(3)">Сотрудники</button>
+        <button onclick="showFrame(4)">Отчёты</button>
+        <button onclick="showFrame(5)">Рапорт</button>
+        <button onclick="showFrame(1)">Выйти</button>
+    </nav>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    
+    <div class="container">
+        <!-- Авторизация -->
+        <section id="frame1" class="frame active">
+            <h2>Авторизация</h2>
+            <input type="text" placeholder="Логин">
+            <input type="password" placeholder="Пароль">
+            <button onclick="showFrame(2)">Войти</button>
+        </section>
+
+        <!-- Камеры с записями -->
+        <section id="frame2" class="frame">
+            <h2>Камеры</h2>
+            <div class="video-container">
+                <iframe src="https://youtu.be/tx5UXWT_Keo?si=prEpAJNdSWCg_lzQ" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://youtu.be/a_TbjRKwE3g?si=I-OjxogVBbg1oZ6O" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://youtu.be/GclntRNbVNc?si=hoqbv-sHP0Mj-SoR" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://youtu.be/RxCoRu0wA1o?si=D49GCBU9lQYR98va" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://youtu.be/Q2BTe0T3SFY?si=vSAiFxSuQmHtdT7X" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://youtu.be/eFqolfD4wlA?si=Al-u3Qo_9g-ksDF3" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Сотрудники -->
+        <section id="frame3" class="frame">
+            <h2>Сотрудники</h2>
+            <div class="employee-list">
+                <p>Алексеев Виктор Михайлович - ID: 213</p>
+                <p>Смирнов Алексей Иванович - ID: 312</p>
+                <p>Петрова Анна Сергеевна - ID: 341</p>
+                <p>Кузнецов Дмитрий Владимирович - ID: 105</p>
+            </div>
+        </section>
+
+        <!-- Отчёты -->
+        <section id="frame4" class="frame">
+            <h2>Отчёты</h2>
+            <div class="employee-list">
+                <p><span class="entry">Вход:</span> Алексеев Виктор - 08:15 | 01.03.24</p>
+                <p><span class="entry">Вход:</span> Смирнов Алексей - 09:00 | 01.03.24</p>
+                <p><span class="exit">Выход:</span> Алексеев Виктор - 17:30 | 01.03.24</p>
+                <p><span class="exit">Выход:</span> Смирнов Алексей - 18:00 | 01.03.24</p>
+            </div>
+        </section>
+
+        <!-- Рапорт -->
+        <section id="frame5" class="frame">
+            <h2>Рапорт</h2>
+            <form onsubmit="submitReport(event)">
+                <input type="text" placeholder="ФИО охранника" required>
+                <input type="text" placeholder="ID охранника" required>
+                <input type="text" placeholder="ФИО сотрудника" required>
+                <input type="text" placeholder="ID сотрудника" required>
+                <textarea placeholder="Описание нарушения" required></textarea>
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.sidebar').classList.toggle('collapsed');
+        }
+
+        function showFrame(frameNumber) {
+            document.querySelectorAll('.frame').forEach(frame => frame.classList.remove('active'));
+            document.getElementById('frame' + frameNumber).classList.add('active');
+        }
+
+        function submitReport(event) {
+            event.preventDefault();
+            alert('Рапорт успешно отправлен!');
+        }
+    </script>
+</body>
+</html>
