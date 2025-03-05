@@ -5,70 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ИС Октябрь</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .video-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            justify-items: center;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 10px;
-            background: #444;
-            border-radius: 10px;
-        }
-        .video-container iframe {
-            width: 250px;
-            height: 140px;
-            border-radius: 5px;
-        }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 200px;
-            height: 100%;
-            background: #222;
-            padding: 10px;
-            transition: transform 0.3s ease-in-out;
-        }
-        .sidebar.collapsed {
-            transform: translateX(-100%);
-        }
-        .menu-toggle {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background: #555;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            display: none;
-        }
-        .sidebar.collapsed + .menu-toggle {
-            display: block;
-        }
-        .frame {
-            display: none;
-            padding: 20px;
-            background: #555;
-            border-radius: 10px;
-            max-width: 1000px;
-            margin: 20px auto;
-        }
-        .frame.active {
-            display: block;
-        }
-        .entry {
-            color: #4CAF50;
-            font-weight: bold;
-        }
-        .exit {
-            color: #FF5733;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     <nav class="sidebar">
@@ -83,7 +19,7 @@
     
     <div class="container">
         <!-- Авторизация -->
-        <section id="frame1" class="frame active">
+        <section id="frame1" class="frame-active">
             <h2>Авторизация</h2>
             <input type="text" placeholder="Логин">
             <input type="password" placeholder="Пароль">
@@ -126,16 +62,18 @@
         </section>
 
         <!-- Рапорт -->
-        <section id="frame5" class="frame">
+        <section id="frame5" class="frame-report">
+            <div class="div-raport">
             <h2>Рапорт</h2>
-            <form onsubmit="submitReport(event)">
-                <input type="text" placeholder="ФИО охранника" required>
-                <input type="text" placeholder="ID охранника" required>
-                <input type="text" placeholder="ФИО сотрудника" required>
-                <input type="text" placeholder="ID сотрудника" required>
-                <textarea placeholder="Описание нарушения" required></textarea>
-                <button type="submit">Отправить</button>
-            </form>
+                <form onsubmit="submitReport(event)">
+                    <input type="text" placeholder="ФИО охранника" required>
+                    <input type="text" placeholder="ID охранника" required>
+                    <input type="text" placeholder="ФИО сотрудника" required>
+                    <input type="text" placeholder="ID сотрудника" required>
+                    <textarea placeholder="Описание нарушения" required></textarea>
+                    <button type="submit">Отправить</button>
+                </form>
+        </div>
         </section>
     </div>
 
